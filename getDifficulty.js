@@ -2,8 +2,6 @@
 //If this breaks it means the class name changed, which is very likely
 document.onreadystatechange = function() {
   if (document.readyState == "complete") {
-      console.log(document.readyState);
-      //firstAsync();
         (async () => {
             await asyncCall();
         })();
