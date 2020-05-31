@@ -26,10 +26,10 @@
     "default_popup": "popup.html",
     "default_title": "LeetCode Timer",
     "default_icon": {
-      "16": "images/LeetCode_logo16.png",
-      "32": "images/LeetCode_logo32.png",
-      "48": "images/LeetCode_logo48.png",
-      "128": "images/LeetCode_logo128.png"
+      "16": "images/LeetCode_logoAlarm16.png",
+      "32": "images/LeetCode_logoAlarm32.png",
+      "48": "images/LeetCode_logoAlarm48.png",
+      "128": "images/LeetCode_logoAlarm128.png"
     }
   },
   "content_scripts": [
@@ -43,10 +43,10 @@
     }
   ],
   "icons": {
-    "16": "images/LeetCode_logo16.png",
-    "32": "images/LeetCode_logo32.png",
-    "48": "images/LeetCode_logo48.png",
-    "128": "images/LeetCode_logo128.png"
+    "16": "images/LeetCode_logoAlarm16.png",
+    "32": "images/LeetCode_logoAlarm32.png",
+    "48": "images/LeetCode_logoAlarm48.png",
+    "128": "images/LeetCode_logoAlarm128.png"
   },
   "manifest_version": 2
 }
