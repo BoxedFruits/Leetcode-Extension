@@ -1,15 +1,71 @@
-let page = document.getElementById('buttonDiv');
-const kButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1'];
-function constructOptions(kButtonColors) {
-  for (let item of kButtonColors) {
-    let button = document.createElement('button');
-    button.style.backgroundColor = item;
-    button.addEventListener('click', function() {
-      chrome.storage.sync.set({color: item}, function() {
-        console.log('color is ' + item);
-      })
+let hardTime = document.getElementById("hardTime");
+let mediumTime = document.getElementById("mediumTime");
+let easyTime = document.getElementById("easyTime");
+
+let hardButton = document.getElementById("hardButton");
+let mediumButton = document.getElementById("mediumButton");
+let easyButton = document.getElementById("easyButton");
+
+let silentButton = document.getElementById("popupNotificationSilent");
+let soundButton = document.getElementById("popupNotificationSound");
+
+chrome.storage.sync.get(['hard'], function(result) {
+  hardTime.value= result.hard;
+});
+
+chrome.storage.sync.get(['medium'], function(result) {
+  mediumTime.value = result.medium;
+});
+
+chrome.storage.sync.get(['easy'], function(result) {
+  easyTime.value = result.easy;
+});
+
+chrome.storage.sync.get(['silent'],function(result){
+  if(result.silent == false){
+    soundButton.checked = true;
+    silentButton.checked = false;
+  }else{
+    silentButton.checked = true;
+    soundButton.checked = false;
+  }
+})
+
+hardButton.onclick = function(){
+  var hardCurrent = parseInt(hardTime.value);
+  chrome.storage.sync.set({
+    hard: hardCurrent
+    }, function() {
+  });
+}
+
+mediumButton.onclick = function(){
+  chrome.storage.sync.set({
+    medium: parseInt(mediumTime.value)
+    }, function() {
+  });
+}
+
+easyButton.onclick = function(){
+  chrome.storage.sync.set({
+    easy: parseInt(easyTime.value)
+    }, function() {
+  });
+}
+silentButton.onclick = function(){
+  if(silentButton.checked == true){
+    console.log("silent button checked");
+    chrome.storage.sync.set({
+      silent: true
     });
-    page.appendChild(button);
   }
 }
-constructOptions(kButtonColors);
+
+soundButton.onclick = function(){
+  if(soundButton.checked == true){
+    console.log("sound button checked");
+    chrome.storage.sync.set({
+      silent: false
+    });
+  }
+}

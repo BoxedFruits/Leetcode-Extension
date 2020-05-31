@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-        margin: 10px;
-      }
-    </style>
+    <title>Leetcode Extension</title>
   </head>
+  <style>
+    div.notificationOptions {padding:40px}
+  </style>
   <body>
-    <div id="buttonDiv">
+
+
+    <label for="hardTime">Hard Time:</label>
+    <input type="number" id="hardTime" name="hardTime" min = "1" max = "1440"><button id = "hardButton">Change Time</button><br><br>
+    <label for="mediumTime">Medium Time:</label>
+    <input type="number" id="mediumTime" name="mediumTime" min = "1" max = "1440"><button id = "mediumButton">Change Time</button><br><br>
+    <label for="easyTime">Easy Time:</label>
+    <input type="number" id="easyTime" name="easyTime" min = "1" max = "1440"><button id = "easyButton">Change Time</button><br><br>
+
+
+    <div class = "notificationOptions">
+      <h1>Notification Settings</h1>
+      <!-- <input type="radio" id="badgeNotification" name="notificationType" value="male">
+      <label for="badgeNotification">Badge</label><br> -->
+      <!-- <input type="radio" id="popupNotification" name="notificationType" value="female">
+      <label for="popupNotification">Popup</label><br> -->
+      <input type="radio" id="popupNotificationSilent" name="notificationType" value="female">
+      <label for="popupNotificationSilent">Silent</label><br>
+      <input type="radio" id="popupNotificationSound" name="notificationType" value="female">
+      <label for="popupNotificationSound">Sound</label><br>
     </div>
-    <div>
-      <p>Choose a different background color!</p>
-    </div>
+
   </body>
   <script src="options.js"></script>
 </html>

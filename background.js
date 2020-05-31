@@ -1,12 +1,12 @@
 chrome.runtime.onInstalled.addListener(function(details) {
     //This is where the time for different difficulty will be stored
     chrome.storage.sync.set({
-      color: '#3aa757',
-      easy: 1,
-      medium: 2,
-      hard: 3
+      easy: 20,
+      medium: 30,
+      hard: 45,
+      lastTime: 0,
+      silent:false
       }, function() {
-      console.log("The color is green.");
     });
 
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
@@ -22,47 +22,61 @@ chrome.runtime.onInstalled.addListener(function(details) {
 
     
       chrome.alarms.onAlarm.addListener(function(){
-        chrome.notifications.create({
+        var silentAlarm;
+        chrome.storage.sync.get(['silent'],function(result){
+          silentAlarm = result.silent;
+          chrome.notifications.create({
             type:     'basic',
             iconUrl:  'LeetCode_logo.png',
-            title:    'Dis the leetcode timer doe',
-            message:  'The timer has run out',
+            title:    'Leetcode Extension',
+            message:  'The timer has run out ' + silentAlarm,
+            requireInteraction: true,
+            silent: silentAlarm,
             buttons: [
               {title: 'Leetcode Alarm'}
             ],
             priority: 0});
+        });
+
       });
+
       chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         console.log(sender);
         if (message.data == "setAlarm") {
           chrome.storage.sync.get(["difficulty"],function(result){
             chrome.storage.sync.get([result.difficulty],function(time){
               console.log(time[result.difficulty]);
-              //chrome.alarms.create("LeetcodeAlarm",{ delayInMinutes: time[result.difficulty]});
-               chrome.alarms.create("LeetcodeAlarm",{ delayInMinutes: 1});
+              chrome.alarms.create("LeetcodeAlarm",{ delayInMinutes: time[result.difficulty]});
             });
           });
-        }else if(message.data == "getSuccess"){
-          console.log("background js getSuccess");
-          chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.executeScript(
-                {file: 'getSuccess.js'},function(){
-                  console.log("executing getsucess");
-                });
-                chrome.alarms.getAll(function(time){
-                  console.log(time);
-                });
-           });
+          sendResponse({});
+          return true;
         }else if(message.data == "clearAlarm"){
           chrome.alarms.clear("LeetcodeAlarm");
           chrome.alarms.getAll(function(time){
               console.log(time);
             });
+            sendResponse({});
+            //return true;
+        }
+        if(message.data == "clearLastTime"){
+          console.log("claerLastime");
+            chrome.storage.sync.set({
+              lastTime: 0
+              });
+        }else if(message.data == "updateLastTime"){
+          chrome.alarms.get("LeetcodeAlarm", function(alarms) {
+            if(alarms !== undefined){
+              console.log(alarms["scheduledTime"]);
+              chrome.storage.sync.set({lastTime: alarms["scheduledTime"] - Date.now()})
+              //  chrome.alarms.create("LeetcodeAlarm",{ delayInMinutes: 1});
+              console.log( (alarms["scheduledTime"] - Date.now()));
+            }
+            });
         }
       });
 
       //Figuring out when the Submission requests are done
-      //Now need to either inject js to find if success or failed
       chrome.webRequest.onBeforeRequest.addListener(
         function(details) {
           console.log("went to evil.com"); 
