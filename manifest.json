@@ -1,5 +1,5 @@
 {
-  "name": "Getting Started Example",
+  "name": "Leetcode Alarm",
   "version": "1.0",
   "description": "Chrome extension that will automatically start when you start a question. This is to help emulate the pressures of an actual interview where you are expected to solve a question in a certain amount of time",
   "permissions": [
