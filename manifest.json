@@ -3,17 +3,15 @@
   "version": "1.0",
   "description": "Extension that automatically begins when you start a question on Leetcode to emulate the time constraints in a technical interview",
   "permissions": [
-    "activeTab",
     "declarativeContent",
     "storage",
     "alarms",
     "notifications",
-    "webNavigation",
+    "webRequest",
     "tabs",
     "*://statsd-frontend.leetcode.com/*",
     "https://leetcode.com/problems/*",
-    "https://leetcode.com/problems/*/submissions/",
-    "webRequest"
+    "https://leetcode.com/problems/*/submissions/"
   ],
   "options_page": "options.html",
   "background": {
