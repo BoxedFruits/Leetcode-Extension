@@ -37,7 +37,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
             ],
             priority: 0});
         });
-
+        chrome.storage.sync.set({lastTime:0});
       });
 
       chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
