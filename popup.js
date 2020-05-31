@@ -7,7 +7,6 @@ let clearAlarm = document.getElementById('clearAlarm');
 let resetAlarm = document.getElementById('resetAlarm');
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  console.log('DOM fully loaded and parsed');
   chrome.alarms.get("LeetcodeAlarm", function(alarms) {
     if(alarms !== undefined){
       var n = Date.now();
