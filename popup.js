@@ -121,20 +121,3 @@ pauseAlarm.onclick = function(){
     updateTimer(newDelay);
   }
 }
-// For debugging
-getTimer.onclick = function(element) {
-  chrome.alarms.get("LeetcodeAlarm", function(alarms) { //* TODO: Make sure case with no alarms is covered */
-      if(alarms !== undefined){
-        console.log("Schedule Time: " + alarms["scheduledTime"]);
-        var d = new Date();
-        var n = d.getTime();
-        console.log("Current Time: " + n);
-        var ms = alarms["scheduledTime"] - Date.now();
-        min = Math.floor((ms / 1000 / 60) << 0),
-        sec = Math.floor((ms / 1000) % 60);
-        // updateTimer(ms);
-      }else{
-        console.log("No alarm");
-      }
-  });
-}

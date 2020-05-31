@@ -29,7 +29,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
             type:     'basic',
             iconUrl:  'LeetCode_logo.png',
             title:    'Leetcode Extension',
-            message:  'The timer has run out ' + silentAlarm,
+            message:  'The timer has run out ',
             requireInteraction: true,
             silent: silentAlarm,
             buttons: [
