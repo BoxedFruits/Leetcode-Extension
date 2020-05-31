@@ -14,7 +14,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       var ms = alarms["scheduledTime"] - n;
       min = Math.floor((ms / 1000 / 60) << 0),
       sec = Math.floor((ms / 1000) % 60);
-      console.log("Time left: " + min + ':' + sec);
       updateTimer(ms);
     }else{
       //console.log("No alarm");
@@ -32,7 +31,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
           pauseAlarm.innerText = "Resume Alarm";
           newDelay = lastTime;
           timer.innerText = ("Time Left: " + delay);
-          console.log("Time Left: " + delay);
         }else{
           timer.innerText = ("Time Left: 00:00");
         }
@@ -78,7 +76,6 @@ resetAlarm.onclick = function(){
   //Have to create the alarm here because async nature of the API makes it difficult to set display the new time correctly
   chrome.storage.sync.get(["difficulty"], function(result) {
     chrome.storage.sync.get([result.difficulty], function(time) {
-        console.log(time[result.difficulty]);
         chrome.alarms.create("LeetcodeAlarm", {
             delayInMinutes: time[result.difficulty]
         });
@@ -135,7 +132,6 @@ getTimer.onclick = function(element) {
         var ms = alarms["scheduledTime"] - Date.now();
         min = Math.floor((ms / 1000 / 60) << 0),
         sec = Math.floor((ms / 1000) % 60);
-        console.log("Time Left: " + min + ':' + sec);
         // updateTimer(ms);
       }else{
         console.log("No alarm");

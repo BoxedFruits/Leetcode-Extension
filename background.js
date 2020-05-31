@@ -45,7 +45,6 @@ chrome.runtime.onInstalled.addListener(function(details) {
         if (message.data == "setAlarm") {
           chrome.storage.sync.get(["difficulty"],function(result){
             chrome.storage.sync.get([result.difficulty],function(time){
-              console.log(time[result.difficulty]);
               chrome.alarms.create("LeetcodeAlarm",{ delayInMinutes: time[result.difficulty]});
             });
           });
@@ -60,17 +59,13 @@ chrome.runtime.onInstalled.addListener(function(details) {
             //return true;
         }
         if(message.data == "clearLastTime"){
-          console.log("claerLastime");
             chrome.storage.sync.set({
               lastTime: 0
               });
         }else if(message.data == "updateLastTime"){
           chrome.alarms.get("LeetcodeAlarm", function(alarms) {
             if(alarms !== undefined){
-              console.log(alarms["scheduledTime"]);
               chrome.storage.sync.set({lastTime: alarms["scheduledTime"] - Date.now()})
-              //  chrome.alarms.create("LeetcodeAlarm",{ delayInMinutes: 1});
-              console.log( (alarms["scheduledTime"] - Date.now()));
             }
             });
         }
@@ -79,11 +74,9 @@ chrome.runtime.onInstalled.addListener(function(details) {
       //Figuring out when the Submission requests are done
       chrome.webRequest.onBeforeRequest.addListener(
         function(details) {
-          console.log("went to evil.com"); 
           chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.executeScript(
                 {file: 'getSuccess.js'},function(){
-                  console.log("executing getsucess");
                 });
               });
         },

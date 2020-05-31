@@ -54,7 +54,6 @@ easyButton.onclick = function(){
 }
 silentButton.onclick = function(){
   if(silentButton.checked == true){
-    console.log("silent button checked");
     chrome.storage.sync.set({
       silent: true
     });
@@ -63,7 +62,6 @@ silentButton.onclick = function(){
 
 soundButton.onclick = function(){
   if(soundButton.checked == true){
-    console.log("sound button checked");
     chrome.storage.sync.set({
       silent: false
     });
